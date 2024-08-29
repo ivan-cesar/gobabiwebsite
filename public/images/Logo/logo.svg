@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 201 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        font-family: Poppins-Black, Poppins;
+        font-size: 37.3px;
+        font-weight: 800;
+      }
+
+      .cls-1, .cls-2 {
+        isolation: isolate;
+      }
+
+      .cls-3 {
+        fill: url(#Dégradé_sans_nom);
+        stroke-width: 0px;
+      }
+    </style>
+    <linearGradient id="Dégradé_sans_nom" data-name="Dégradé sans nom" x1="22.8" y1="810.99" x2="81.1" y2="810.99" gradientTransform="translate(0 -777.99)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bd24df"/>
+      <stop offset="1" stop-color="#2d6ade"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-3" d="M52.8,63c16.6,0,30-13.4,30-30S69.4,3,52.8,3s-30,13.4-30,30,13.4,30,30,30Z"/>
+  <g class="cls-2">
+    <text class="cls-1" transform="translate(31.85 44.94)"><tspan x="0" y="0">Go’babi</tspan></text>
+  </g>
+</svg>
