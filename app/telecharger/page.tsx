@@ -1,11 +1,12 @@
+"use client";
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
-const Detect = () => {
+const Detect: React.FC = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const userAgent = navigator.userAgent || navigator.vendor;
+        const userAgent: string = navigator.userAgent || navigator.vendor;
 
         if (/android/i.test(userAgent) || /windows/i.test(userAgent)) {
             // Rediriger vers Google Play Store pour Android ou PC Windows

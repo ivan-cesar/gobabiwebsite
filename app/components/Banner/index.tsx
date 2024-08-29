@@ -4,8 +4,14 @@ import React, { useState, useEffect } from 'react';
 import ModalVideo from 'react-modal-video';
 import { QRCodeCanvas } from 'qrcode.react'; // Importation du composant QR code
 
-const Banner = () => {
-    const [isOpen, setOpen] = useState(false);
+const Banner: React.FC = () => {
+    const [isOpen, setOpen] = useState<boolean>(false);
+    const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
+
+    useEffect(() => {
+        // Génère l'URL pour le QR code avec l'URL actuelle
+        setQrCodeUrl(`${window.location.origin}/telecharger`);
+    }, []);
 
     return (
         <div className='relative bg-image dark:bg-dark-image' id="home-section">
@@ -28,8 +34,8 @@ const Banner = () => {
                             </p>
                             <div className='flex align-middle justify-center md:justify-start'>
                                 <div className='flex flex-col items-center mr-5'>
-                                    <QRCodeCanvas value={`${window.location.origin}/telecharger`} size={150} /> {/* QR Code généré avec l'URL de détection */}
-                                    {/* <p className='mt-4 text-gray-700 dark:text-gray-300'>Scannez pour télécharger</p> */}
+                                    {/* QR Code généré avec l'URL de détection */}
+                                    {qrCodeUrl && <QRCodeCanvas value={qrCodeUrl} size={150} />}
                                 </div>
                                 <button onClick={() => setOpen(true)} className='bg-transparent flex justify-center items-center text-gray-900 dark:text-white'>
                                     <Image src={'/images/Banner/playbutton.svg'} alt="button-image" className='mr-3' width={47} height={47} />
