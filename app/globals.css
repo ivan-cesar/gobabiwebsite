@@ -22,7 +22,13 @@ html:not([data-scroll="0"]) .navbar {
   box-shadow: 0 15px 30px rgb(0 0 0 / 12%);
   transition: 0.4s linear;
 }
-
+html:not([data-scroll="0"]) .navbar-light {
+  @apply fixed top-0 w-full z-40;
+  background-image: linear-gradient(90deg, #BD24DF 0%, #2D6ADE 97.15%);
+  background-blend-mode: overlay;
+  box-shadow: 0 15px 30px rgb(0 0 0 / 12%);
+  transition: 0.4s linear;
+}
 .navbutton {
   @apply bg-gradient-to-r from-[#BD24DF] to-[#2D6ADE] rounded-md;
 }

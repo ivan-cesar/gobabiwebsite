@@ -33,9 +33,16 @@ const Banner: React.FC = () => {
                                 standard dummy text ever since the 1500s
                             </p>
                             <div className='flex align-middle justify-center md:justify-start'>
-                                <div className='flex flex-col items-center mr-5'>
+                                <div className='flex flex-col items-center mr-5 relative'>
                                     {/* QR Code généré avec l'URL de détection */}
-                                    {qrCodeUrl && <QRCodeCanvas value={qrCodeUrl} size={150} />}
+                                    {qrCodeUrl && (
+                                        <>
+                                            <QRCodeCanvas value={qrCodeUrl} size={150} includeMargin={true} />
+                                            <div className="text-base absolute top-[43%] text-center font-bold text-[#BD24DF] dark:text-gray-200">
+                                                Go&rsquo;Babi
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                                 <button onClick={() => setOpen(true)} className='bg-transparent flex justify-center items-center text-gray-900 dark:text-white'>
                                     <Image src={'/images/Banner/playbutton.svg'} alt="button-image" className='mr-3' width={47} height={47} />

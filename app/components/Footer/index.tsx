@@ -44,6 +44,11 @@ const Footer: React.FC = () => {
     } else {
       setIsDarkMode(prefersDark);
     }
+
+    document.documentElement.classList.toggle(
+      "dark",
+      prefersDark || storedTheme === "dark"
+    );
   }, []);
 
   return (
@@ -75,8 +80,8 @@ const Footer: React.FC = () => {
                   <Image
                     src={
                       isDarkMode
-                        ? `${items.imgsrc}-dark.svg`
-                        : `${items.imgsrc}-light.svg`
+                        ? `${items.imgsrc}-light.svg`
+                        : `${items.imgsrc}-dark.svg`
                     }
                     alt={items.imgsrc}
                     className="footer-icons"

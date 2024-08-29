@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
         setRecaptchaToken(token);
       };
   return (
-    <Disclosure as="nav" className="navbar">
+    <Disclosure as="nav" className="navbar-light dark:navbar">
       <>
         {/* Navigation bar content here */}
         <div className="mx-auto max-w-7xl p-3 md:p-4 lg:px-8">
