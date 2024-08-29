@@ -2,26 +2,10 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import ModalVideo from 'react-modal-video';
+import { QRCodeCanvas } from 'qrcode.react'; // Importation du composant QR code
 
 const Banner = () => {
     const [isOpen, setOpen] = useState(false);
-    const [downloadLink, setDownloadLink] = useState('');
-
-    useEffect(() => {
-        // Détecter l'OS de l'utilisateur
-        const userAgent = navigator.userAgent || navigator.vendor;
-
-        if (/android/i.test(userAgent) || /windows/i.test(userAgent)) {
-            // Si l'appareil est un téléphone Android ou un PC Windows
-            setDownloadLink('https://play.google.com/store/apps/details?id=com.gobabi.user&hl=fr&pli=1');
-        } else if (/iPad|iPhone|iPod/.test(userAgent) || /Macintosh/.test(userAgent)) {
-            // Si l'appareil est un iPhone, iPad ou Mac
-            setDownloadLink('https://apps.apple.com/ci/app/gobabi/id6467127120');
-        } else {
-            // Lien par défaut (par exemple, Android)
-            setDownloadLink('https://play.google.com/store/apps/details?id=com.gobabi.user&hl=fr&pli=1');
-        }
-    }, []);
 
     return (
         <div className='relative bg-image dark:bg-dark-image' id="home-section">
@@ -43,11 +27,10 @@ const Banner = () => {
                                 standard dummy text ever since the 1500s
                             </p>
                             <div className='flex align-middle justify-center md:justify-start'>
-                                <a href={downloadLink} target="_blank" rel="noopener noreferrer">
-                                    <button className='text-xl font-semibold text-white dark:text-black py-4 px-6 lg:px-12 navbutton mr-6'>
-                                        Télécharger
-                                    </button>
-                                </a>
+                                <div className='flex flex-col items-center mr-5'>
+                                    <QRCodeCanvas value={`${window.location.origin}/telecharger`} size={150} /> {/* QR Code généré avec l'URL de détection */}
+                                    {/* <p className='mt-4 text-gray-700 dark:text-gray-300'>Scannez pour télécharger</p> */}
+                                </div>
                                 <button onClick={() => setOpen(true)} className='bg-transparent flex justify-center items-center text-gray-900 dark:text-white'>
                                     <Image src={'/images/Banner/playbutton.svg'} alt="button-image" className='mr-3' width={47} height={47} />
                                     How it works
@@ -64,12 +47,11 @@ const Banner = () => {
                             <div className='arrowSeven'></div>
                             <div className='arrowEight'></div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default Banner;
