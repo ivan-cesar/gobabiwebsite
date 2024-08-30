@@ -27,7 +27,7 @@ const faqdata: faqdata[] = [
 const Faq = () => {
     return (
         <div className="my-20 px-6" id="faq-section">
-            <h3 className="text-center text-3xl lg:text-5xl font-bold text-gray-700 dark:text-gray-300 mb-3">Frequently Asked And Question</h3>
+            <h3 className="text-center text-3xl lg:text-5xl font-bold text-gray-700 dark:text-gray-300 mb-3">Foire aux questions</h3>
             <p className="text-center lg:text-lg font-normal text-gray-700 dark:text-gray-300">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br /> been the industry standard dummy text ever since the 1500s,</p>
 
             <div className="mx-auto max-w-7xl">

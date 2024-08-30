@@ -83,6 +83,13 @@ html:not([data-scroll="0"]) .navbar-light {
   height: 360px;
 }
 
+.image-container {
+  background-image: url('/images/Banner/_images_Banner_banner.png');
+  width: 1013px;
+  height: 760px;
+  background-size: cover;
+  background-position: center;
+}
 
 
 
@@ -381,7 +388,6 @@ html:not([data-scroll="0"]) .navbar {
 .hover-underline {
   display: inline-flex;
   position: relative;
-  color: #fff;
   justify-content: center;
   align-items: center;
 }

@@ -25,9 +25,9 @@ const products: ProductType[] = [
 
 const socialLinks: Social[] = [
   { imgsrc: "/images/Footer/insta", href: "https://instagram.com/" },
-  { imgsrc: "/images/Footer/dribble", href: "https://dribble.com/" },
+  { imgsrc: "/images/Footer/dribble", href: "https://www.facebook.com/profile.php?id=61554710738617" },
   { imgsrc: "/images/Footer/twitter", href: "https://x.com/Gobabi225" },
-  { imgsrc: "/images/Footer/youtube", href: "https://youtube.com/" },
+  { imgsrc: "/images/Footer/youtube", href: "https://www.youtube.com/@gobabi" },
 ];
 
 const Footer: React.FC = () => {

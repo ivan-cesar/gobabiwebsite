@@ -5,9 +5,11 @@ import { Bars3Icon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import Drawer from "./Drawer";
 import Drawerdata from "./Drawerdata";
 import Modal from "../Modal/Modal";
-import ReCAPTCHA from 'react-google-recaptcha';
+import ReCAPTCHA from "react-google-recaptcha";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
-const RECAPTCHA_SITE_KEY = '6LcF-DEqAAAAALc3TW8PIyaga4OFrhig2mNouKZ2';
+const RECAPTCHA_SITE_KEY = "6LcF-DEqAAAAALc3TW8PIyaga4OFrhig2mNouKZ2";
 
 interface NavigationItem {
   name: string;
@@ -30,7 +32,9 @@ function classNames(...classes: string[]) {
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Ajout de l'état pour le modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null); // Ajout pour le reCAPTCHA
+  const [phoneValue, setPhoneValue] = useState<string | undefined>(); // Ajout pour le numéro de téléphone
 
   useEffect(() => {
     const prefersDark = window.matchMedia(
@@ -62,11 +66,12 @@ const Navbar: React.FC = () => {
     setIsModalOpen(true); // Ouvrir le modal au clic sur "Contacter Nous"
   };
 
-    const handleRecaptchaChange = (token: string | null) => {
-        setRecaptchaToken(token);
-      };
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
+
   return (
-    <Disclosure as="nav" className="navbar-light dark:navbar">
+    <Disclosure as="nav" className="navbar dark:navbar-light">
       <>
         {/* Navigation bar content here */}
         <div className="mx-auto max-w-7xl p-3 md:p-4 lg:px-8">
@@ -104,8 +109,8 @@ const Navbar: React.FC = () => {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-900 text-gray-700 dark:text-gray-300"
-                          : "navlinks text-white hover:text-offwhite hover-underline",
+                          ? "bg-gray-900 "
+                          : "navlinks text-gray-700 dark:text-gray-300 hover:text-offwhite hover-underline",
                         "px-3 py-4 rounded-md text-lg font-normal"
                       )}
                       aria-current={item.href ? "page" : undefined}
@@ -161,76 +166,81 @@ const Navbar: React.FC = () => {
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <h2 className="text-xl font-bold mb-4">Contactez-nous</h2>
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-          <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            Nom et Prénoms
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            Numéro de Téléphone
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="subject"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            Objet
-          </label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            required
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="message"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={4}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            required
-          />
-        </div>
-        <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={handleRecaptchaChange} />
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-500 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-md hover:bg-blue-600"
-          >
-            Envoyer
-          </button>
-        </div>
-
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Nom et Prénoms
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Numéro de Téléphone
+              </label>
+              <PhoneInput
+                placeholder="0707070707"
+                id="phone"
+                name="phone"
+                value={phoneValue}
+                onChange={setPhoneValue}
+                defaultCountry="CI"
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="subject"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Objet
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                className="mt-1 p-2 w-full border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                required
+              />
+            </div>
+            <ReCAPTCHA
+              sitekey={RECAPTCHA_SITE_KEY}
+              onChange={handleRecaptchaChange}
+            />
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="bg-blue-500 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-md hover:bg-blue-600"
+              >
+                Envoyer
+              </button>
+            </div>
           </form>
         </Modal>
       </>
@@ -239,7 +249,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-function setRecaptchaToken(token: string | null) {
-    throw new Error("Function not implemented.");
-}
-
